@@ -8,18 +8,18 @@ import com.wirecard.payments.service.exception.WireCardException;
 
 public class PaymentUnregisteredException extends WireCardException {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public PaymentUnregisteredException(String message) {
-		super(message);
-	}
-	
-	public PaymentUnregisteredException() {
-		super("Unregistered Payment!");
-	}
+    public PaymentUnregisteredException(String message) {
+        super(message);
+    }
 
-	public PaymentUnregisteredException(List<ObjectError> allErrors) {
-		this();
-		super.allErros = allErrors;
-	}
+    public PaymentUnregisteredException() {
+        super("Unregistered Payment!");
+    }
+
+    public PaymentUnregisteredException(List<ObjectError> allErrors) {
+        this();
+        super.allErros = allErrors;
+    }
 }

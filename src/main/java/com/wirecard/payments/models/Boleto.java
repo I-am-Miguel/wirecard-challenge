@@ -19,11 +19,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Boleto {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "boleto_id")
-	private Long id;
-	@NotEmpty
-	private String number;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "boleto_id")
+    private Long id;
+    @NotEmpty
+    private String number;
 
 }

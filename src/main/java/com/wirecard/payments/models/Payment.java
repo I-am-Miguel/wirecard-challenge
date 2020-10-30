@@ -32,43 +32,43 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Payment {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="payment_id")
-	private Integer id;
-	@NotNull
-	@Min(value = 1)
-	private BigDecimal amount;
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	private PaymentType type;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "payment_id")
+    private Integer id;
+    @NotNull
+    @Min(value = 1)
+    private BigDecimal amount;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private PaymentType type;
 
-	@Enumerated(EnumType.STRING)
-	private PaymentStatus status;
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus status;
 
-	@Valid
-	@ManyToOne
-	@JoinColumn(name = "client_id", nullable = false)
-	@LazyCollection(LazyCollectionOption.TRUE)
-	private Client client;
+    @Valid
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    private Client client;
 
-	@Valid
-	@ManyToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name = "buyer_id", nullable = false)
-	@LazyCollection(LazyCollectionOption.TRUE)
-	private Buyer buyer;
+    @Valid
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "buyer_id", nullable = false)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    private Buyer buyer;
 
-	@Valid
-	@Nullable
-	@ManyToOne
-	@JoinColumn(name = "card_id", nullable = true)
-	@LazyCollection(LazyCollectionOption.TRUE)
-	private Card card;
-	
-	@Valid
-	@Nullable
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "boleto_id", nullable = true)
-	@LazyCollection(LazyCollectionOption.TRUE)
-	private Boleto boleto;
+    @Valid
+    @Nullable
+    @ManyToOne
+    @JoinColumn(name = "card_id", nullable = true)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    private Card card;
+
+    @Valid
+    @Nullable
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "boleto_id", nullable = true)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    private Boleto boleto;
 }

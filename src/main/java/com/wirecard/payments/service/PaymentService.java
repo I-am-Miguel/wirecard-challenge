@@ -20,40 +20,40 @@ import com.wirecard.payments.service.processor.erros.ProcessorNotFoundException;
 @Service
 public class PaymentService {
 
-	private ProcessorSerice processorSerice;
-	private PaymentRepository paymentRepository;
+    private ProcessorSerice processorSerice;
+    private PaymentRepository paymentRepository;
 
-	@Autowired
-	public PaymentService(PaymentRepository paymentRepository, ProcessorSerice processorSerice) {
-		this.processorSerice=processorSerice;
-		this.paymentRepository=paymentRepository;
-	}
+    @Autowired
+    public PaymentService(PaymentRepository paymentRepository, ProcessorSerice processorSerice) {
+        this.processorSerice = processorSerice;
+        this.paymentRepository = paymentRepository;
+    }
 
-	public Optional<String> createPayment(Payment payment) throws ProcessorNotFoundException, PaymentUnregisteredException {
-		Pair<Boolean, Optional<String>> statusProcessing = processorSerice
-				.activePaymentProcessor(payment.getType())
-				.process(payment);
-		if(statusProcessing.getFirst()) {
-			return statusProcessing.getSecond();
-		}
-		throw new PaymentUnregisteredException();
-	}
+    public Optional<String> createPayment(Payment payment) throws ProcessorNotFoundException, PaymentUnregisteredException {
+        Pair<Boolean, Optional<String>> statusProcessing = processorSerice
+                .activePaymentProcessor(payment.getType())
+                .process(payment);
+        if (statusProcessing.getFirst()) {
+            return statusProcessing.getSecond();
+        }
+        throw new PaymentUnregisteredException();
+    }
 
-	public Payment findPaymentById(String payment_id) throws WireCardException{
-		boolean isDigit = payment_id.chars().allMatch(Character::isDigit);
-		if(!isDigit)
-			throw new BadRequestException(
-					Lists.newArrayList(new ObjectError(payment_id, "Field must be numeric")));
-		
-		return paymentRepository.findById(Integer.valueOf(payment_id))
-				.orElseThrow(PaymentNotFoundException::new);
-	}
+    public Payment findPaymentById(String payment_id) throws WireCardException {
+        boolean isDigit = payment_id.chars().allMatch(Character::isDigit);
+        if (!isDigit)
+            throw new BadRequestException(
+                    Lists.newArrayList(new ObjectError(payment_id, "Field must be numeric")));
 
-	public List<Payment> listAllPayments() throws PaymentNotFoundException {
-		List<Payment> payments = paymentRepository.findAll();
-		if (payments.isEmpty())
-			throw new PaymentNotFoundException();
-		return payments;
-	}
+        return paymentRepository.findById(Integer.valueOf(payment_id))
+                .orElseThrow(PaymentNotFoundException::new);
+    }
+
+    public List<Payment> listAllPayments() throws PaymentNotFoundException {
+        List<Payment> payments = paymentRepository.findAll();
+        if (payments.isEmpty())
+            throw new PaymentNotFoundException();
+        return payments;
+    }
 
 }

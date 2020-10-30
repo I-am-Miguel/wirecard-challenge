@@ -17,27 +17,27 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 public class PaymentsApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PaymentsApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PaymentsApplication.class, args);
+    }
 
-	@Bean
-	public MessageSource messageSource() {
-		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-		messageSource.setBasename("classpath:AppResources");
-		messageSource.setDefaultEncoding("UTF-8");
-		return messageSource;
-	}
+    @Bean
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:AppResources");
+        messageSource.setDefaultEncoding("UTF-8");
+        return messageSource;
+    }
 
-	@Bean
-	public LocaleResolver localeResolver() {
-		CookieLocaleResolver resolver = new CookieLocaleResolver();
-		resolver.setDefaultLocale(new Locale("en"));
-		return resolver;
-	}
-	
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+    @Bean
+    public LocaleResolver localeResolver() {
+        CookieLocaleResolver resolver = new CookieLocaleResolver();
+        resolver.setDefaultLocale(new Locale("en"));
+        return resolver;
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 }

@@ -31,23 +31,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Card {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "card_id")
-	private Integer id;
-	@NotEmpty
-	private String holderName;
-	
-	@NotEmpty
-	@NotNull(message = "Credit card number is required")
-	@Size(min = 16, max = 16, message = "Credit card number must 16 digits long")
-	@Digits(fraction = 0, integer = 16)
-	@CreditCardNumber
-	private String number;
-	@NotNull @FutureOrPresent
-	@DateTimeFormat(iso = ISO.DATE)
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date expirationDate;
-	@NotNull @Size(min = 3, max = 3, message = "CVV card number must 3 digits long")
-	private String cvv;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "card_id")
+    private Integer id;
+    @NotEmpty
+    private String holderName;
+
+    @NotEmpty
+    @NotNull(message = "Credit card number is required")
+    @Size(min = 16, max = 16, message = "Credit card number must 16 digits long")
+    @Digits(fraction = 0, integer = 16)
+    @CreditCardNumber
+    private String number;
+    @NotNull
+    @FutureOrPresent
+    @DateTimeFormat(iso = ISO.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date expirationDate;
+    @NotNull
+    @Size(min = 3, max = 3, message = "CVV card number must 3 digits long")
+    private String cvv;
 }

@@ -21,16 +21,16 @@ import io.swagger.annotations.Api;
 @RequestMapping(path = "/clients", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ClientController {
 
-	@Autowired
-	private ClientRepository clientRepository;
+    @Autowired
+    private ClientRepository clientRepository;
 
-	@GetMapping
-	public List<Client> listAll() throws WireCardException{
-		return clientRepository.findAll();
-	}
+    @GetMapping
+    public List<Client> listAll() throws WireCardException {
+        return clientRepository.findAll();
+    }
 
-	@GetMapping(path = "/{id}")
-	public Client paymentStatus(@PathVariable("id") Integer id) throws WireCardException {
-		return clientRepository.findById(id).orElseThrow(ClientNotFoundException::new);
-	}
+    @GetMapping(path = "/{id}")
+    public Client paymentStatus(@PathVariable("id") Integer id) throws WireCardException {
+        return clientRepository.findById(id).orElseThrow(ClientNotFoundException::new);
+    }
 }

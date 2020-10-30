@@ -15,9 +15,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ErrorDetails {
 
-	private String title;
-	private Integer status;
-	private Long timestamp;
-	private String message;
-	private List<ObjectError> cause;
+    private String title;
+    private Integer status;
+    private Long timestamp;
+    private String message;
+    private List<ObjectError> cause;
 }
