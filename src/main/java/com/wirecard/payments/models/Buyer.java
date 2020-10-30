@@ -24,16 +24,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Buyer {
 
-	@Id
-	@JsonIgnore
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="buyer_id")
-	private Integer id;
-	@NotBlank
-	private String name;
-	@Email
-	private String email;
-	@CPF
-	private String cpf;
+    @Id
+    @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "buyer_id")
+    private Integer id;
+    @NotBlank
+    private String name;
+    @Email
+    private String email;
+    @CPF
+    private String cpf;
 
 }

@@ -28,63 +28,63 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 @ComponentScan(basePackageClasses = SwaggerConfig.class)
-public class SwaggerConfig extends WebMvcConfigurationSupport{                                    
+public class SwaggerConfig extends WebMvcConfigurationSupport {
 
-	@Bean
-    public Docket api() { 
-        return new Docket(DocumentationType.SWAGGER_2)  
-          .select()
-          		.apis(RequestHandlerSelectors.basePackage("com.wirecard"))
-          		.paths(PathSelectors.any())
-          		.build()
-          		.pathMapping("/")
-          		.directModelSubstitute(LocalDate.class, String.class)
-          		.genericModelSubstitutes(ResponseEntity.class)
-          		.useDefaultResponseMessages(false)                                   
-				.globalResponseMessage(RequestMethod.GET, standardMessages())
-				.globalResponseMessage(RequestMethod.POST, standardMessagesPost())
-				.globalResponseMessage(RequestMethod.PUT, standardMessages())
-				.globalResponseMessage(RequestMethod.DELETE, standardMessages())
-				.apiInfo(metaData());
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.wirecard"))
+                .paths(PathSelectors.any())
+                .build()
+                .pathMapping("/")
+                .directModelSubstitute(LocalDate.class, String.class)
+                .genericModelSubstitutes(ResponseEntity.class)
+                .useDefaultResponseMessages(false)
+                .globalResponseMessage(RequestMethod.GET, standardMessages())
+                .globalResponseMessage(RequestMethod.POST, standardMessagesPost())
+                .globalResponseMessage(RequestMethod.PUT, standardMessages())
+                .globalResponseMessage(RequestMethod.DELETE, standardMessages())
+                .apiInfo(metaData());
     }
 
 
-	private ApiInfo metaData() {
+    private ApiInfo metaData() {
         return new ApiInfo(
                 "WireCard Test", "Api Payments", "0.1", "Termos e Serviço",
                 new Contact("Welligton Miguel", "https://www.linkedin.com/in/welligton-miguel/", "miguelwelligton@gmail.com"),
-               "GNU General Public License 3.0", "https://www.gnu.org/licenses/gpl.txt", Collections.emptyList());
+                "GNU General Public License 3.0", "https://www.gnu.org/licenses/gpl.txt", Collections.emptyList());
     }
-	
-	@Override
-	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("swagger-ui.html")
-        .addResourceLocations("classpath:/META-INF/resources/");
 
-		registry.addResourceHandler("/webjars/**")
-        .addResourceLocations("classpath:/META-INF/resources/webjars/");
-	}
-	
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addRedirectViewController("/", "/swagger-ui.html");
-	    registry.addRedirectViewController("/null/v2/api-docs", "/v2/api-docs");
-	    registry.addRedirectViewController("/null/swagger-resources/configuration/ui", "/swagger-resources/configuration/ui");
-	    registry.addRedirectViewController("/null/swagger-resources/configuration/security", "/swagger-resources/configuration/security");
-	    registry.addRedirectViewController("/null/swagger-resources", "/swagger-resources");
-	}
-	
-	private List<ResponseMessage> standardMessagesPost() {
-		List<ResponseMessage> messages = standardMessages();
-		messages.add(new ResponseMessageBuilder().code(201).message("Created").build());
-		return messages;
-	}
+    @Override
+    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
 
-	private List<ResponseMessage> standardMessages() {
-		return Lists.newArrayList(
-				new ResponseMessageBuilder().code(200).message("OK").build(),
-				new ResponseMessageBuilder().code(400).message("Bad Request").build(),
-				new ResponseMessageBuilder().code(404).message("Not Found").build());
-	}
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addRedirectViewController("/", "/swagger-ui.html");
+        registry.addRedirectViewController("/null/v2/api-docs", "/v2/api-docs");
+        registry.addRedirectViewController("/null/swagger-resources/configuration/ui", "/swagger-resources/configuration/ui");
+        registry.addRedirectViewController("/null/swagger-resources/configuration/security", "/swagger-resources/configuration/security");
+        registry.addRedirectViewController("/null/swagger-resources", "/swagger-resources");
+    }
+
+    private List<ResponseMessage> standardMessagesPost() {
+        List<ResponseMessage> messages = standardMessages();
+        messages.add(new ResponseMessageBuilder().code(201).message("Created").build());
+        return messages;
+    }
+
+    private List<ResponseMessage> standardMessages() {
+        return Lists.newArrayList(
+                new ResponseMessageBuilder().code(200).message("OK").build(),
+                new ResponseMessageBuilder().code(400).message("Bad Request").build(),
+                new ResponseMessageBuilder().code(404).message("Not Found").build());
+    }
 
 }

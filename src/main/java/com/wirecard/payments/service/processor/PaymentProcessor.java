@@ -14,11 +14,13 @@ import com.wirecard.payments.service.processor.erros.PaymentUnregisteredExceptio
 @Component
 public abstract class PaymentProcessor {
 
-	@Autowired
-	protected PaymentRepository paymentRepository;
-	
+    @Autowired
+    protected PaymentRepository paymentRepository;
+
     public abstract Pair<Boolean, Optional<String>> process(Payment payment) throws PaymentUnregisteredException;
+
     public abstract PaymentType getType();
+
     public abstract boolean getStatus();
 
 }

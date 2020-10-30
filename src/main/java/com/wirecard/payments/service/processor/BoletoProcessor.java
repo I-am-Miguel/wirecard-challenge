@@ -16,28 +16,28 @@ import com.wirecard.payments.service.processor.erros.PaymentUnregisteredExceptio
 @Service
 public class BoletoProcessor extends PaymentProcessor {
 
-	@Override
-	public Pair<Boolean, Optional<String>> process(Payment payment) throws PaymentUnregisteredException {
-		payment.setBoleto(Boleto.builder()
-		.number("34191.09065 20674.712938 83456.900009 6 69240000029800")
-		.build());
-		try {
-			payment.setStatus(PaymentStatus.APPROVED);
-			paymentRepository.save(payment);
-			return Pair.of(true, Optional.of(payment.getBoleto().getNumber()));
-		} catch (Exception e) {
-			throw new PaymentUnregisteredException(
-					Lists.newArrayList(new ObjectError("BOLETO REGISTER", e.getMessage())));
-		}
-	}
+    @Override
+    public Pair<Boolean, Optional<String>> process(Payment payment) throws PaymentUnregisteredException {
+        payment.setBoleto(Boleto.builder()
+                .number("34191.09065 20674.712938 83456.900009 6 69240000029800")
+                .build());
+        try {
+            payment.setStatus(PaymentStatus.APPROVED);
+            paymentRepository.save(payment);
+            return Pair.of(true, Optional.of(payment.getBoleto().getNumber()));
+        } catch (Exception e) {
+            throw new PaymentUnregisteredException(
+                    Lists.newArrayList(new ObjectError("BOLETO REGISTER", e.getMessage())));
+        }
+    }
 
-	@Override
-	public PaymentType getType() {
-		return PaymentType.BOLETO;
-	}
+    @Override
+    public PaymentType getType() {
+        return PaymentType.BOLETO;
+    }
 
-	@Override
-	public boolean getStatus() {
-		return true;
-	}
+    @Override
+    public boolean getStatus() {
+        return true;
+    }
 }
